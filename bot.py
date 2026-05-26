@@ -18,7 +18,7 @@ DISCORD_TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 
 # IP y Puerto servidor de Minecraft
-MC_SERVER_HOST = "127.0.0.1" #Cambiar a 127.0.0.1 para la Maquina / Cambiara 10.143.110.223 en local
+MC_SERVER_HOST = "127.0.0.1" #Cambiar a x.x.x.x para la Maquina / Cambiara x.x.x.x en local
 MC_SERVER_PORT = 25565
 
 # Intervalo de actualización del status (en segundos). 15 o 30 segundos es ideal.
@@ -145,7 +145,7 @@ async def ping_server(host, port):
 
 # Función principal para obtener el estado intentando el host configurado y el de respaldo
 async def get_minecraft_status(host, port):
-    # Intentamos primero con la IP configurada (ej. 127.0.0.1)
+    # Intentamos primero con la IP configurada
     res = await ping_server(host, port)
     if res is not None:
         return res
