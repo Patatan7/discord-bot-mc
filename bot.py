@@ -18,7 +18,7 @@ DISCORD_TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 
 # IP y Puerto servidor de Minecraft
-MC_SERVER_HOST = "127.0.0.1" #Cambiar a x.x.x.x para la Maquina / Cambiara x.x.x.x en local
+MC_SERVER_HOST = os.getenv("MC_SERVER_HOST")
 MC_SERVER_PORT = 25565
 
 # Intervalo de actualización del status (en segundos). 15 o 30 segundos es ideal.
@@ -150,8 +150,8 @@ async def get_minecraft_status(host, port):
     if res is not None:
         return res
 
-    # Si falla, intentamos automáticamente con la IP de ZeroTier de San Antonio como respaldo
-    fallback_host = "10.143.110.223" if host == "127.0.0.1" else "127.0.0.1"
+    MC_FALLBACK_HOST= os.getenv("MC_FALLBACK_HOST")
+    fallback_host = MC_FALLBACK_HOST if host == MC_SERVER_HOST else MC_SERVER_HOST
     res = await ping_server(fallback_host, port)
     if res is not None:
         return res
